@@ -88,14 +88,16 @@ const addContentEntries = async(contentId,entry)=>{
     return newEntry;
 }
 const updateContentEntries = async(id,entry)=>{
-    const newEntry = await db.Entries.update({
-        fields:entry
-    },{
+  const updatedEntry = await db.Entries.findOne({
         where:{
             contentTypeId:id
         }
     })
-    return newEntry;
+    updatedEntry.fields = entry;
+    updatedEntry.changed('fields',true);
+    await updatedEntry.save();
+    return updatedEntry;
+
 }
 
 module.exports = {addContent,addFields,getContents,updateContent,updateContentField,deleteContentField,getFieldCount
