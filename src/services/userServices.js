@@ -100,5 +100,26 @@ const updateContentEntries = async(id,entry)=>{
 
 }
 
+const getContentCount = async() => {
+    const contents = await db.ContentTypes.findAll();
+    const contentCount = contents.length;
+    return contentCount;
+}
+
+const getFields = async(contentId) => {
+    const contents = await db.ContentTypes.findOne({
+        where:{
+            id:contentId
+        }
+    })
+    const fields = contents.fields;
+    return fields;
+}
+
+const getContent = async (params) => {
+    const content = await db.ContentTypes.findOne({where:{id:params.id}});
+    return content;
+}
+
 module.exports = {addContent,addFields,getContents,updateContent,updateContentField,deleteContentField,getFieldCount
-,getContentEntries,addContentEntries,updateContentEntries};
+,getContentEntries,addContentEntries,updateContentEntries,getContentCount,getFields,getContent};
