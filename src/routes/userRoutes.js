@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
-
 router.post("/addContent",userController.addContent);
 
 router.post("/addFields/:contentId",userController.addFields);
@@ -26,7 +25,11 @@ router.put("/updateContentEntries/:contentId",userController.updateContentEntrie
 
 router.get("/getFields/:contentId",userController.getFields)
 
-router.get('/contents/:id', userController.getContent);  //done
+router.get('/contents/:id', userController.getContent);  
+
+router.delete("/deleteEntries/:contentId",userController.deleteContent)
+
+router.delete("/deleteContent/:contentId",userController.deleteContentByID)
 
 module.exports = {userRouter:router};
 

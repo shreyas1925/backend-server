@@ -146,6 +146,27 @@ const getContent = async(req,res)=>{
       res.status(500).send({message:error.message});
   }
 }
+
+const deleteContent = async(req,res)=>{
+  try{
+      const {contentId} = req.params;
+      const contents = await UserServices.deleteEntries(contentId);
+      res.status(200).json(contents);
+  }catch(error){
+      res.status(500).send({message:error.message});
+  }
+}
+
+const deleteContentByID = async(req,res)=>{
+  try{
+      const {contentId} = req.params;
+      const contents = await UserServices.deleteContentByID(contentId);
+      res.status(200).json(contents);
+  }catch(error){
+      res.status(500).send({message:error.message});
+  }
+}
+
 module.exports = {
   addContent,
   getContents,
@@ -159,5 +180,7 @@ module.exports = {
   updateContentEntries,
   getContentCount,
   getFields,
-  getContent
+  getContent,
+  deleteContent,
+  deleteContentByID
 };
